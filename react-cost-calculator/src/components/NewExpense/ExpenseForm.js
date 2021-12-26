@@ -1,6 +1,6 @@
 import './ExpenseForm.css';
 import React, { useState } from 'react';
-const ExpenseForm = () => {
+const ExpenseForm = (props) => {
 
     // let titleElement, dateElement, amountElement ;
 
@@ -27,12 +27,17 @@ const ExpenseForm = () => {
     const submitHandler = (event) => {
         event.preventDefault();
         const formvalue = {
-            title: titleElement,
-            amount: amountElement,
-            dateValue: new Date(dateElement)
+            expenseTitle: titleElement,
+            expenseAmount: amountElement,
+            expenseDate: new Date(dateElement)
         }
 
         console.log(formvalue);
+        props.onSaveExpenseData(formvalue);
+        setTitleElement('');
+        setAmountElement('');
+        setDateElement('');
+
     }
 
     return (
@@ -46,7 +51,7 @@ const ExpenseForm = () => {
                 <div className="new-expense__control">
                     <label>Amount</label>
 
-                    <input type='number' min="0.01" max="1000.01" onChange={amountChangeHandler} value={amountElement} />
+                    <input type='number' min="0.01" max="1000.99" onChange={amountChangeHandler} value={amountElement} />
                 </div>
                 <div className="new-expense__control">
                     <label>Date</label>
@@ -56,6 +61,7 @@ const ExpenseForm = () => {
             </div>
 
             <div className="new-expense__actions">
+                <button type='button' onClick={props.onCancel}>Cancel</button>
                 <button type='submit'>Add Expense</button>
             </div>
         </form>

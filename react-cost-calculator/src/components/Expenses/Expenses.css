@@ -7,3 +7,12 @@
     align-items: center;
     
 }
+
+.expenses label {
+    color: white
+}
+
+
+.expenses p {
+    color: white
+}
